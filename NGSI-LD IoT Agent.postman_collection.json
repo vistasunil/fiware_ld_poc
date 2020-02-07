@@ -1237,21 +1237,27 @@
 	],
 	"variable": [
 		{
-			"id": "f91a5190-f812-4dcc-a1fa-77bf0ca90704",
+			"id": "7e06d8d9-b360-487f-b691-6b1ed4e9eac1",
 			"key": "iot-agent",
 			"value": "localhost:4041",
 			"type": "string"
 		},
 		{
-			"id": "0f8a8343-3667-44ac-9afa-a9457e5246e5",
+			"id": "b9ef4b03-5735-495c-b80b-1c9d0267b853",
 			"key": "orion",
 			"value": "localhost:1026",
 			"type": "string"
 		},
 		{
-			"id": "7d048afc-64ef-450b-9a75-78c5a36b10b0",
+			"id": "7d12ce78-7bb6-49d7-bd29-2cf782669257",
 			"key": "ultralight",
 			"value": "localhost:3001",
+			"type": "string"
+		},
+		{
+			"id": "390e710d-888a-4ee4-ae6a-5822b7bd8c59",
+			"key": "datamodels-context.jsonld",
+			"value": "https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld",
 			"type": "string"
 		}
 	],
