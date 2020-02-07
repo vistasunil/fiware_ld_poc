@@ -20,7 +20,7 @@ version: "3.5"
 services:
   # Orion is the context broker
   orion:
-    image: fiware/orion:${ORION_VERSION}
+    image: fiware/orion-ld
     hostname: orion
     container_name: fiware-orion
     depends_on:
@@ -37,7 +37,10 @@ services:
 
   # IoT-Agent is configured for the UltraLight Protocol
   iot-agent:
-    image: fiware/iotagent-ul:${ULTRALIGHT_VERSION}
+    image: fiware/iotagent-ul-ngsi-ld
+    build:
+      context: iot-agent
+      dockerfile: Dockerfile
     hostname: iot-agent
     container_name: fiware-iot-agent
     depends_on:
@@ -57,7 +60,6 @@ services:
       - IOTA_REGISTRY_TYPE=mongodb #Whether to hold IoT device info in memory or in a database
       - IOTA_LOG_LEVEL=DEBUG # The log level of the IoT Agent
       - IOTA_TIMESTAMP=true # Supply timestamp information with each measurement
-      - IOTA_CB_NGSI_VERSION=v2 # use NGSIv2 when sending updates for active attributes
       - IOTA_AUTOCAST=true # Ensure Ultralight number values are read as numbers not strings
       - IOTA_MONGO_HOST=mongo-db # The host name of MongoDB
       - IOTA_MONGO_PORT=${MONGO_DB_PORT} # The port mongoDB is listening on
@@ -65,6 +67,9 @@ services:
       - IOTA_HTTP_PORT=${IOTA_SOUTH_PORT} # The port used for device traffic over HTTP
       - IOTA_PROVIDER_URL=http://iot-agent:${IOTA_NORTH_PORT}
       - IOTA_DEFAULT_RESOURCE=/iot/d
+
+      - IOTA_CB_NGSI_VERSION=ld # use NGSI-LD when sending updates for active attributes
+      - IOTA_JSON_LD_CONTEXT=https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld
     healthcheck:
       test: curl --fail -s http://iot-agent:${IOTA_NORTH_PORT}/iot/about || exit 1
 
@@ -90,6 +95,8 @@ services:
     environment:
       - "DEBUG=tutorial:*"
       - "WEB_APP_PORT=${TUTORIAL_APP_PORT}" # Port used by the content provider proxy and web-app for viewing data
+      - "NGSI_VERSION=ngsi-ld"
+      - "NGSI_LD_PREFIX=urn:ngsi-ld:"
       - "IOTA_HTTP_HOST=iot-agent"
       - "IOTA_HTTP_PORT=${IOTA_SOUTH_PORT}"
       - "DUMMY_DEVICES_PORT=${TUTORIAL_DUMMY_DEVICE_PORT}" # Port used by the dummy IOT devices to receive commands
