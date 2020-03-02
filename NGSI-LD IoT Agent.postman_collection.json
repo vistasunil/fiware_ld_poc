@@ -48,7 +48,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n \"services\": [\n   {\n     \"apikey\":      \"4jggokgpepnvsb2uv4s40d59ov\",\n     \"cbroker\":     \"http://orion:1026\",\n     \"entity_type\": \"Motion\",\n     \"resource\":    \"/iot/d\",\n     \"trust\": \"08ca25ba8ea0f322f50244c413fce2e32feed43d\"\n   }\n ]\n}"
+							"raw": "{\n \"services\": [\n   {\n     \"apikey\":      \"4jggokgpepnvsb2uv4s40d59ov\",\n     \"cbroker\":     \"http://orion:1026\",\n     \"entity_type\": \"Thing\",\n     \"resource\":    \"/iot/d\"\n   }\n ]\n}"
 						},
 						"url": {
 							"raw": "http://{{iot-agent}}/iot/services",
@@ -114,7 +114,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "c|1"
+							"raw": "c|3"
 						},
 						"url": {
 							"raw": "http://localhost:7896/iot/d?k=4jggokgpepnvsb2uv4s40d59ov&i=motion001",
@@ -174,6 +174,83 @@
 					"response": []
 				},
 				{
+					"name": "Unprovisioned Dummy Device  - Measurement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "c|1"
+						},
+						"url": {
+							"raw": "http://localhost:7896/iot/d?k=4jggokgpepnvsb2uv4s40d59ov&i=motion003",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7896",
+							"path": [
+								"iot",
+								"d"
+							],
+							"query": [
+								{
+									"key": "k",
+									"value": "4jggokgpepnvsb2uv4s40d59ov"
+								},
+								{
+									"key": "i",
+									"value": "motion003"
+								}
+							]
+						},
+						"description": "This example simulates a request coming from the device `motion001`\n\nThe request to the previously provisioned resource `iot/d` is in UltraLight 2.0 format\nand identifies the device `motion001` and passes a known API key.\n\nA similar request was made in the previous tutorial (before the IoT Agent was connected)\nwhen the door was unlocked, you will have seen the state of each motion sensor changing\nand a Northbound request will be logged in the device monitor."
+					},
+					"response": []
+				},
+				{
+					"name": "Context Broker - Read the Device provisioned by Service Group",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/"
+							}
+						],
+						"url": {
+							"raw": "http://{{orion}}/ngsi-ld/v1/entities/?type=Thing",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								""
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Thing"
+								}
+							]
+						},
+						"description": "This example returns the data for the `Motion` entity with the `id=urn:ngsd-ld:Motion:001` within the context data.\n\nThe response shows that the device with `id=motion001` has been successfully identifed by the IoT Agent and mapped to the\nentity `id=urn:ngsd-ld:Motion:001`. This new entity has been created within the context data. The `c` \nattribute from the dummy device measurement request has been mapped to the more meaningful `count` attribute\nwithin the context. As you will notice, a `TimeInstant` attribute has been added to both the entity and the\nmeta data of the attribute - this represents the last time the entity and attribute have been updated, and is\nautomatically added to each new entity because the `IOTA_TIMESTAMP`  environment variable was set when the\nIoT Agent was started up. The `refStore` attribute comes from the `static_attributes` set when the device was provisioned."
+					},
+					"response": []
+				},
+				{
 					"name": "IoT Agent - Provision an Actuator",
 					"request": {
 						"method": "POST",
@@ -213,7 +290,7 @@
 				{
 					"name": "IoT Agent - Invoke a Command",
 					"request": {
-						"method": "POST",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "fiware-service",
@@ -230,18 +307,21 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"actionType\": \"update\",\n    \"entities\": [\n        {\n            \"type\": \"Bell\",\n            \"id\": \"urn:ngsi-ld:Bell:001\",\n            \"ring\" : {\n                \"type\": \"command\",\n                \"value\": \"\"\n            }\n        }\n    ]\n}"
+							"raw": "{ \n\n\t\t\"type\": \"Property\", \n\t\t\"value\": \" \" \n\n}"
 						},
 						"url": {
-							"raw": "http://{{iot-agent}}/v2/op/update",
+							"raw": "http://{{iot-agent}}/ngsi-ld/v1/entities/urn:ngsi-ld:Bell:001/attrs/ring",
 							"protocol": "http",
 							"host": [
 								"{{iot-agent}}"
 							],
 							"path": [
-								"v2",
-								"op",
-								"update"
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:Bell:001",
+								"attrs",
+								"ring"
 							]
 						},
 						"description": "Before we wire-up the context broker, we can test that a command can be send to a device by making a REST request \ndirectly to the IoT Agent's North Port using the `/v1/updateContext` endpoint.\nIt is this endpoint that will eventually be invoked by the context broker once we have connected it up. \nTo test the configuration you can run the command directly as shown.\n\nIf you are viewing the device monitor page, you can also see the state of the bell change.\n\n![](https://fiware.github.io/tutorials.IoT-Agent/img/bell-ring.gif)"
@@ -263,24 +343,159 @@
 							}
 						],
 						"url": {
-							"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Bell:001?options=keyValues",
+							"raw": "http://{{orion}}/ngsi-ld/v1/entities/urn:ngsi-ld:Bell:001",
 							"protocol": "http",
 							"host": [
 								"{{orion}}"
 							],
 							"path": [
-								"v2",
+								"ngsi-ld",
+								"v1",
 								"entities",
 								"urn:ngsi-ld:Bell:001"
-							],
-							"query": [
-								{
-									"key": "options",
-									"value": "keyValues"
-								}
 							]
 						},
 						"description": "The result of the command to ring the bell can be read by querying the entity within the Orion Context Broker. \n\nThe `TimeInstant` shows last the time any command associated with the entity has been invoked. the result of `ring` command can be see in the value of the `ring_info` attribute"
+					},
+					"response": []
+				},
+				{
+					"name": "Context Broker - Read the Command Result Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/"
+							}
+						],
+						"url": {
+							"raw": "http://{{orion}}/ngsi-ld/v1/csourceRegistrations/",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"csourceRegistrations",
+								""
+							]
+						},
+						"description": "The result of the command to ring the bell can be read by querying the entity within the Orion Context Broker. \n\nThe `TimeInstant` shows last the time any command associated with the entity has been invoked. the result of `ring` command can be see in the value of the `ring_info` attribute"
+					},
+					"response": []
+				},
+				{
+					"name": "IoT Agent - Invoke a Command from CB",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\n\t\t\"type\": \"Property\", \n\t\t\"value\": \" \" \n\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/ngsi-ld/v1/entities/urn:ngsi-ld:Bell:001/attrs/ring",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:Bell:001",
+								"attrs",
+								"ring"
+							]
+						},
+						"description": "Before we wire-up the context broker, we can test that a command can be send to a device by making a REST request \ndirectly to the IoT Agent's North Port using the `/v1/updateContext` endpoint.\nIt is this endpoint that will eventually be invoked by the context broker once we have connected it up. \nTo test the configuration you can run the command directly as shown.\n\nIf you are viewing the device monitor page, you can also see the state of the bell change.\n\n![](https://fiware.github.io/tutorials.IoT-Agent/img/bell-ring.gif)"
+					},
+					"response": []
+				},
+				{
+					"name": "IoT Agent - Provision a Lazy Device",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"devices\": [\n   {\n     \"device_id\":   \"motion002\",\n     \"entity_name\": \"urn:ngsi-ld:Motion:002\",\n     \"entity_type\": \"Motion\",\n     \"timezone\":    \"Europe/Berlin\",\n     \"lazy\": [\n       { \"object_id\": \"c\", \"name\":\"count\", \"type\":\"Integer\"}\n      ],\n      \"static_attributes\": [\n         {\"name\":\"refStore\", \"type\": \"Relationship\",\"value\": \"urn:ngsi-ld:Store:002\"}\n      ]\n   }\n ]\n}\n"
+						},
+						"url": {
+							"raw": "http://{{iot-agent}}/iot/devices",
+							"protocol": "http",
+							"host": [
+								"{{iot-agent}}"
+							],
+							"path": [
+								"iot",
+								"devices"
+							]
+						},
+						"description": "Provisioning an actuator is similar to provisioning a sensor. This time an `endpoint` attribute holds\nthe location where the IoT Agent needs to send the UltraLight command and the `commands` array includes\na list of each command that can be invoked. The example below provisions a bell with the `deviceId=bell001`.\nThe endpoint is `http://context-provider:3001/iot/bell001` and it can accept the `ring` command."
+					},
+					"response": []
+				},
+				{
+					"name": "Context Broker - Read a Lazy Device",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "fiware-service",
+								"value": "openiot"
+							},
+							{
+								"key": "fiware-servicepath",
+								"value": "/"
+							}
+						],
+						"url": {
+							"raw": "http://{{orion}}/ngsi-ld/v1/entities/urn:ngsi-ld:Motion:001",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"ngsi-ld",
+								"v1",
+								"entities",
+								"urn:ngsi-ld:Motion:001"
+							]
+						},
+						"description": "This example returns the data for the `Motion` entity with the `id=urn:ngsd-ld:Motion:001` within the context data.\n\nThe response shows that the device with `id=motion001` has been successfully identifed by the IoT Agent and mapped to the\nentity `id=urn:ngsd-ld:Motion:001`. This new entity has been created within the context data. The `c` \nattribute from the dummy device measurement request has been mapped to the more meaningful `count` attribute\nwithin the context. As you will notice, a `TimeInstant` attribute has been added to both the entity and the\nmeta data of the attribute - this represents the last time the entity and attribute have been updated, and is\nautomatically added to each new entity because the `IOTA_TIMESTAMP`  environment variable was set when the\nIoT Agent was started up. The `refStore` attribute comes from the `static_attributes` set when the device was provisioned."
 					},
 					"response": []
 				},
@@ -1211,6 +1426,44 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Upsert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/ld+json",
+						"type": "text"
+					},
+					{
+						"key": "fiware-service",
+						"value": "SmartGondor",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n        {\n            \"@context\": \"http://context.json-ld\",\n            \"pressure\": {\n                \"type\": \"Property\",\n                \"value\": 10\n            },\n            \"consumption_x\": {\n                \"type\": \"Property\",\n                \"value\": 200\n            },\n            \"id\": \"urn:ngsi-ld:Light:light1\",\n            \"type\": \"Light\"\n        }\n    ]\n"
+				},
+				"url": {
+					"raw": "http://localhost:1026/ngsi-ld/v1/entityOperations/upsert/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"ngsi-ld",
+						"v1",
+						"entityOperations",
+						"upsert",
+						""
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -1237,25 +1490,25 @@
 	],
 	"variable": [
 		{
-			"id": "7e06d8d9-b360-487f-b691-6b1ed4e9eac1",
+			"id": "dd184702-1d15-4ba5-98c2-b9227dbe2e3f",
 			"key": "iot-agent",
 			"value": "localhost:4041",
 			"type": "string"
 		},
 		{
-			"id": "b9ef4b03-5735-495c-b80b-1c9d0267b853",
+			"id": "8a829628-cdd5-452b-a4ef-9d2120b65be4",
 			"key": "orion",
 			"value": "localhost:1026",
 			"type": "string"
 		},
 		{
-			"id": "7d12ce78-7bb6-49d7-bd29-2cf782669257",
+			"id": "88ec2023-2937-4dba-a302-4ab199ca4c4f",
 			"key": "ultralight",
 			"value": "localhost:3001",
 			"type": "string"
 		},
 		{
-			"id": "390e710d-888a-4ee4-ae6a-5822b7bd8c59",
+			"id": "99a54368-55ee-4f90-9bef-82f3bb1735a8",
 			"key": "datamodels-context.jsonld",
 			"value": "https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld",
 			"type": "string"

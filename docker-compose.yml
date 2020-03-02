@@ -70,6 +70,7 @@ services:
 
       - IOTA_CB_NGSI_VERSION=ld # use NGSI-LD when sending updates for active attributes
       - IOTA_JSON_LD_CONTEXT=https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld
+      - IOTA_FALLBACK_TENANT=openiot
     healthcheck:
       test: curl --fail -s http://iot-agent:${IOTA_NORTH_PORT}/iot/about || exit 1
 
