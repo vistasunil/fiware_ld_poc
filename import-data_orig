@@ -10,140 +10,98 @@ echo -e "Loading \033[1;34mNGSI-LD\033[0m data using the '"${TUTORIAL_DATA_MODEL
 printf "⏳ Loading context data "
 
 #
-# Create Streetlight Entities in various locations across Berlin
+# Create four Store Entities in various locations across Berlin
 #
-curl -X POST \
+
+curl -s -o /dev/null -X POST \
   'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
   -H 'Content-Type: application/ld+json' \
   -d '{
-           "id":"urn:ngsi-ld:Streetlight:streetlight:001",
-           "type":"Streetlight",
-           "location":{
-                  "type":"GeoProperty",
-                  "value":{
-                         "type":"Point",
-                         "coordinates":[
-                                13.3986,
-                                52.5547
-                         ]
-                  }
-           },
-           "address":{
-                  "type":"Property",
-                  "value":{
-                         "streetAddress":"2, Connaught Place",
-                         "addressRegion":"Delhi",
-                         "addressLocality":"New Delhi",
-                         "postalCode":"110001"
-                  }
-           },
-           "name":{
-                  "type":"Property",
-                  "value":"Streelight 1"
-           },
-           "areaServed":{
-                  "type":"Property",
-                  "value":"Connaught Place 1"
-           },
-           "status":{
-                  "type":"Property",
-                  "value":"ok"
-           },
-           "circuit":{
-                  "type":"Property",
-                  "value":"C-456-A467"
-           },
-           "lanternHeight":{
-                  "type":"Property",
-                  "value":10
-           },
-           "locationCategory":{
-                  "type":"Property",
-                  "value":"centralIsland"
-           },
-           "powerState":{
-                  "type":"Property",
-                  "value":"off"
-           },
-           "controllingMethod":{
-                  "type":"Property",
-                  "value":"individual"
-           },
-           "dateLastLampChange":{
-                  "type":"Property",
-                  "value":{
-                         "datetime":"2016-07-08T08:02:21.753Z"
-                  }
-           },
-           "@context": "'"${TUTORIAL_DATA_MODELS_CONTEXT}"'"
+    "id": "urn:ngsi-ld:Streetlight:streetlight:001",
+    "type": "Building",
+    "category": {"type": "Property", "value": ["commercial"]},
+    "address": {
+      "type": "Property", 
+      "value": {"streetAddress": "Bornholmer Straße 65", "addressRegion": "Berlin", "addressLocality": "Prenzlauer Berg", "postalCode": "10439"},
+      "verified": {"type": "Property", "value": true}
+    },
+    "location": {"type": "GeoProperty", "value": {"type": "Point", "coordinates": [13.3986, 52.5547]}
+    },
+    "name": {"type": "Property", "value": "Bösebrücke Einkauf"},
+    "furniture": {
+      "type": "Relationship", "object": [ "urn:ngsi-ld:Shelf:unit001", "urn:ngsi-ld:Shelf:unit002", "urn:ngsi-ld:Shelf:unit003"]
+    },
+    "@context": "'"${TUTORIAL_DATA_MODELS_CONTEXT}"'"
 }'
 
-curl -X POST \
+
+
+
+curl -s -o /dev/null -X POST \
   'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
   -H 'Content-Type: application/ld+json' \
   -d '{
-           "id":"urn:ngsi-ld:Streetlight:streetlight:002",
-           "type":"Streetlight",
-           "location":{
-                  "type":"GeoProperty",
-                  "value":{
-                         "type":"Point",
-                         "coordinates":[
-                                13.3903,
-                                52.5075
-                         ]
-                  }
-           },
-           "address":{
-                  "type":"Property",
-                  "value":{
-                         "streetAddress":"7, IGI Terminal1",
-                         "addressRegion":"New Delhi",
-                         "addressLocality":"IGI Airport",
-                         "postalCode":"110003"
-                  }
-           },
-           "name":{
-                  "type":"Property",
-                  "value":"Streelight 2"
-           },
-           "areaServed":{
-                  "type":"Property",
-                  "value":"IGI Airport"
-           },
-           "status":{
-                  "type":"Property",
-                  "value":"ok"
-           },
-           "circuit":{
-                  "type":"Property",
-                  "value":"C-456-A467"
-           },
-           "lanternHeight":{
-                  "type":"Property",
-                  "value":10
-           },
-           "locationCategory":{
-                  "type":"Property",
-                  "value":"Airport"
-           },
-           "powerState":{
-                  "type":"Property",
-                  "value":"off"
-           },
-           "controllingMethod":{
-                  "type":"Property",
-                  "value":"individual"
-           },
-           "dateLastLampChange":{
-                  "type":"Property",
-                  "value":{
-                         "datetime":"2017-07-18T08:02:21.753Z"
-                  }
-           },
-    	   "@context": "'"${TUTORIAL_DATA_MODELS_CONTEXT}"'"
+    "id": "urn:ngsi-ld:Streetlight:streetlight:002",
+    "type": "Building",
+    "category": {"type": "Property", "value": ["commercial"]},
+    "address": {
+      "type": "Property", 
+      "value": {"streetAddress":"Friedrichstraße 44", "addressRegion":"Berlin", "addressLocality":"Kreuzberg", "postalCode":"10969"},
+      "verified": {"type": "Property", "value": true}
+    },
+    "location": {"type": "GeoProperty", "value": {"type": "Point", "coordinates": [13.3903,52.5075]}
+    },
+    "name": {"type": "Property", "value": "Checkpoint Markt"},
+    "furniture": {
+      "type": "Relationship", "object": [ "urn:ngsi-ld:Shelf:unit004", "urn:ngsi-ld:Shelf:unit005"]
+    },
+    "@context": "'"${TUTORIAL_DATA_MODELS_CONTEXT}"'"
 }'
 
+curl -s -o /dev/null -X POST \
+  'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
+  -H 'Content-Type: application/ld+json' \
+  -d '{
+    "id": "urn:ngsi-ld:Streetlight:streetlight:003",
+    "type": "Building",
+    "category": {"type": "Property", "value": ["commercial"]},
+    "address": {
+      "type": "Property", 
+      "value": {"streetAddress":"Mühlenstrasse 10", "addressRegion":"Berlin", "addressLocality":"Friedrichshain", "postalCode":"10243"},
+      "verified": {"type": "Property", "value": false}
+    },
+    "location": {"type": "GeoProperty", "value": {"type": "Point", "coordinates": [13.4447,52.5031]}
+    },
+    "name": {"type": "Property", "value": "East Side Galleria"},
+    "furniture": {
+      "type": "Relationship", "object": [ "urn:ngsi-ld:Shelf:unit006", "urn:ngsi-ld:Shelf:unit007", "urn:ngsi-ld:Shelf:unit008"]
+    },
+    "@context": "'"${TUTORIAL_DATA_MODELS_CONTEXT}"'"
+}'
+
+
+curl -s -o /dev/null -X POST \
+  'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
+  -H 'Content-Type: application/ld+json' \
+  -d '{
+    "id": "urn:ngsi-ld:Streetlight:streetlight:004",
+    "type": "Building",
+    "category": {"type": "Property", "value": ["commercial"]},
+    "address": {
+      "type": "Property", 
+      "value": {"streetAddress":"Panoramastraße 1A", "addressRegion":"Berlin", "addressLocality":"Mitte", "postalCode":"10178"},
+      "verified": {"type": "Property", "value": false}
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {"type": "Point", "coordinates": [13.4094,52.5208]}
+    },
+    "name": {"type": "Property", "value": "Tower Trödelmarkt"},
+    "furniture": {
+      "type": "Relationship", "object": [ "urn:ngsi-ld:Shelf:unit009"]
+    },
+    "@context": "'"${TUTORIAL_DATA_MODELS_CONTEXT}"'"
+}'
 
 #
 # Create a series of Shelf Entities and to be placed in each Store.
