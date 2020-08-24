@@ -76,9 +76,9 @@ services:
 
   # Tutorial acts as a series of dummy IoT Sensors over HTTP
   tutorial:
-    image: fiware/tutorials.context-provider
-    hostname: tutorial
-    container_name: fiware-tutorial
+    image: fiware-app #fiware/tutorials.context-provider
+    hostname: fiware-app
+    container_name: fiware-app
     depends_on:
       - orion
       - iot-agent

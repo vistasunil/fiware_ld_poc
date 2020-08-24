@@ -17,7 +17,7 @@ curl -s -o /dev/null -X POST \
   'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
   -H 'Content-Type: application/ld+json' \
   -d '{
-    "id": "urn:ngsi-ld:Building:store001",
+    "id": "urn:ngsi-ld:Streetlight:streetlight:001",
     "type": "Building",
     "category": {"type": "Property", "value": ["commercial"]},
     "address": {
@@ -41,7 +41,7 @@ curl -s -o /dev/null -X POST \
   'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
   -H 'Content-Type: application/ld+json' \
   -d '{
-    "id": "urn:ngsi-ld:Building:store002",
+    "id": "urn:ngsi-ld:Streetlight:streetlight:002",
     "type": "Building",
     "category": {"type": "Property", "value": ["commercial"]},
     "address": {
@@ -62,7 +62,7 @@ curl -s -o /dev/null -X POST \
   'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
   -H 'Content-Type: application/ld+json' \
   -d '{
-    "id": "urn:ngsi-ld:Building:store003",
+    "id": "urn:ngsi-ld:Streetlight:streetlight:003",
     "type": "Building",
     "category": {"type": "Property", "value": ["commercial"]},
     "address": {
@@ -84,7 +84,7 @@ curl -s -o /dev/null -X POST \
   'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
   -H 'Content-Type: application/ld+json' \
   -d '{
-    "id": "urn:ngsi-ld:Building:store004",
+    "id": "urn:ngsi-ld:Streetlight:streetlight:004",
     "type": "Building",
     "category": {"type": "Property", "value": ["commercial"]},
     "address": {
@@ -127,7 +127,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:001"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Building:store001",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -152,7 +152,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:003"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Building:store001",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -177,7 +177,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:004"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Building:store001",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -202,7 +202,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:001"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Building:store002",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:002",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -227,7 +227,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:002"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Building:store002",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:002",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -253,7 +253,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:001"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Building:store003",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -278,7 +278,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:008"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Building:store003",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -303,7 +303,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:009"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Building:store003",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -328,7 +328,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:009"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Building:store004",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:004",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -486,7 +486,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:001",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Building:store001"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:001"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -503,7 +503,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:002",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Building:store001"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:003"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -520,7 +520,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:003",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Building:store001"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:004"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -541,7 +541,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:004",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Building:store002"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:002"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:001"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -558,7 +558,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:005",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Building:store002"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:002"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:002"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -579,7 +579,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:006",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Building:store003"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:001"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -596,7 +596,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:007",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Building:store003"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:008"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -613,7 +613,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:008",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Building:store003"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:009"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -633,7 +633,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:010",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Building:store004"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:004"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:001"},
     "stockCount": {"type": "Property", "value": 10000},
