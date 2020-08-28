@@ -12,188 +12,136 @@ printf "⏳ Loading context data "
 #
 # Create Streetlight Entities in various locations across Berlin
 #
-curl -s -o /dev/null -X POST \
+curl -X POST \
   'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
   -H 'Content-Type: application/ld+json' \
   -d '{
-    "id": "urn:ngsi-ld:Streetlight:streetlight:mexico:4000",
-    "type": "Streetlight",
-    "location": {
-        "type": "GeoProperty",
-        "value": {
-            "type": "Point",
-            "coordinates": [
-                -3.16448559171566,
-                40.62785133667362
-            ]
-        }
-    },
-    "areaServed": {
-        "type": "Property",
-        "value": "City park"
-    },
-    "status": {
-        "type": "Property",
-        "value": "ok"
-    },
-    "refStreetlightModel": {
-        "type": "Relationship",
-        "object": "urn:ngsi-ld:StreetlightModel:streetlightmodel:STEEL_Tubular_10m"
-    },
-    "circuit": {
-        "type": "Property",
-        "value": "C-456-A467"
-    },
-    "lanternHeight": {
-        "type": "Property",
-        "value": 10
-    },
-    "locationCategory": {
-        "type": "Property",
-        "value": "centralIsland"
-    },
-    "powerState": {
-        "type": "Property",
-        "value": "off"
-    },
-    "controllingMethod": {
-        "type": "Property",
-        "value": "individual"
-    },
-    "dateLastLampChange": {
-        "type": "Property",
-        "value": {
-            "@type": "DateTime",
-            "@value": "2016-07-08T08:02:21.753Z"
-        }
-    },
-    "@context": [
-        "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
-    ]
+           "id":"urn:ngsi-ld:Streetlight:streetlight:001",
+           "type":"Streetlight",
+           "location":{
+                  "type":"GeoProperty",
+                  "value":{
+                         "type":"Point",
+                         "coordinates":[
+                                13.3986,
+                                52.5547
+                         ]
+                  }
+           },
+           "address":{
+                  "type":"Property",
+                  "value":{
+                         "streetAddress":"2, Connaught Place",
+                         "addressRegion":"Delhi",
+                         "addressLocality":"New Delhi",
+                         "postalCode":"110001"
+                  }
+           },
+           "name":{
+                  "type":"Property",
+                  "value":"Streelight 1"
+           },
+           "areaServed":{
+                  "type":"Property",
+                  "value":"Connaught Place 1"
+           },
+           "status":{
+                  "type":"Property",
+                  "value":"ok"
+           },
+           "circuit":{
+                  "type":"Property",
+                  "value":"C-456-A467"
+           },
+           "lanternHeight":{
+                  "type":"Property",
+                  "value":10
+           },
+           "locationCategory":{
+                  "type":"Property",
+                  "value":"centralIsland"
+           },
+           "powerState":{
+                  "type":"Property",
+                  "value":"off"
+           },
+           "controllingMethod":{
+                  "type":"Property",
+                  "value":"individual"
+           },
+           "dateLastLampChange":{
+                  "type":"Property",
+                  "value":{
+                         "datetime":"2016-07-08T08:02:21.753Z"
+                  }
+           },
+           "@context": "'"${TUTORIAL_DATA_MODELS_CONTEXT}"'"
 }'
 
-curl -s -o /dev/null -X POST \
+curl -X POST \
   'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
   -H 'Content-Type: application/ld+json' \
   -d '{
-    "id": "urn:ngsi-ld:Streetlight:streetlight:mexico:4567",
-    "type": "Streetlight",
-    "location": {
-        "type": "GeoProperty",
-        "value": {
-            "type": "Point",
-            "coordinates": [
-                -3.164485591715449,
-                40.62785133667262
-            ]
-        }
-    },
-    "areaServed": {
-        "type": "Property",
-        "value": "Roundabouts city entrance"
-    },
-    "status": {
-        "type": "Property",
-        "value": "ok"
-    },
-    "refStreetlightGroup": {
-        "type": "Relationship",
-        "object": "urn:ngsi-ld:StreetlightGroup:streetlightgroup:G345"
-    },
-    "refStreetlightModel": {
-        "type": "Relationship",
-        "object": "urn:ngsi-ld:StreetlightModel:streetlightmodel:STEEL_Tubular_10m"
-    },
-    "circuit": {
-        "type": "Property",
-        "value": "C-456-A467"
-    },
-    "lanternHeight": {
-        "type": "Property",
-        "value": 10
-    },
-    "locationCategory": {
-        "type": "Property",
-        "value": "centralIsland"
-    },
-    "powerState": {
-        "type": "Property",
-        "value": "off"
-    },
-    "controllingMethod": {
-        "type": "Property",
-        "value": "individual"
-    },
-    "dateLastLampChange": {
-        "type": "Property",
-        "value": {
-            "@type": "DateTime",
-            "@value": "2016-07-08T08:02:21.753Z"
-        }
-    },
-    "@context": [
-        "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
-    ]
-}'
-
-curl -s -o /dev/null -X POST \
-  'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
-  -H 'Content-Type: application/ld+json' \
-  -d '{
-    "id": "urn:ngsi-ld:Streetlight:streetlight:mexico:5000",
-    "type": "Streetlight",
-    "location": {
-        "type": "GeoProperty",
-        "value": {
-            "type": "Point",
-            "coordinates": [
-                -3.16448557171566,
-                40.62785135667362
-            ]
-        }
-    },
-    "areaServed": {
-        "type": "Property",
-        "value": "City Center"
-    },
-    "status": {
-        "type": "Property",
-        "value": "ok"
-    },
-    "refStreetlightModel": {
-        "type": "Relationship",
-        "object": "urn:ngsi-ld:StreetlightModel:streetlightmodel:STEEL_Tubular_10m"
-    },
-    "circuit": {
-        "type": "Property",
-        "value": "C-456-A467"
-    },
-    "lanternHeight": {
-        "type": "Property",
-        "value": 10
-    },
-    "locationCategory": {
-        "type": "Property",
-        "value": "centralIsland"
-    },
-    "powerState": {
-        "type": "Property",
-        "value": "off"
-    },
-    "controllingMethod": {
-        "type": "Property",
-        "value": "individual"
-    },
-    "dateLastLampChange": {
-        "type": "Property",
-        "value": {
-            "@type": "DateTime",
-            "@value": "2016-07-08T08:02:21.753Z"
-        }
-    },
-    "@context": [
-        "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
-    ]
+           "id":"urn:ngsi-ld:Streetlight:streetlight:002",
+           "type":"Streetlight",
+           "location":{
+                  "type":"GeoProperty",
+                  "value":{
+                         "type":"Point",
+                         "coordinates":[
+                                13.3903,
+                                52.5075
+                         ]
+                  }
+           },
+           "address":{
+                  "type":"Property",
+                  "value":{
+                         "streetAddress":"7, IGI Terminal1",
+                         "addressRegion":"New Delhi",
+                         "addressLocality":"IGI Airport",
+                         "postalCode":"110003"
+                  }
+           },
+           "name":{
+                  "type":"Property",
+                  "value":"Streelight 2"
+           },
+           "areaServed":{
+                  "type":"Property",
+                  "value":"IGI Airport"
+           },
+           "status":{
+                  "type":"Property",
+                  "value":"ok"
+           },
+           "circuit":{
+                  "type":"Property",
+                  "value":"C-456-A467"
+           },
+           "lanternHeight":{
+                  "type":"Property",
+                  "value":10
+           },
+           "locationCategory":{
+                  "type":"Property",
+                  "value":"Airport"
+           },
+           "powerState":{
+                  "type":"Property",
+                  "value":"off"
+           },
+           "controllingMethod":{
+                  "type":"Property",
+                  "value":"individual"
+           },
+           "dateLastLampChange":{
+                  "type":"Property",
+                  "value":{
+                         "datetime":"2017-07-18T08:02:21.753Z"
+                  }
+           },
+    	   "@context": "'"${TUTORIAL_DATA_MODELS_CONTEXT}"'"
 }'
 
 
@@ -221,7 +169,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:001"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:4567",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -246,7 +194,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:003"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:4567",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -271,7 +219,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:004"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:4567",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -296,7 +244,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:001"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:4000",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:002",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -321,7 +269,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:002"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:4000",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:002",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -347,7 +295,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:001"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:5000",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -372,7 +320,7 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:008"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:5000",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -397,7 +345,32 @@ curl -s -o /dev/null -X POST \
       "type": "Relationship", "object": "urn:ngsi-ld:Product:009"
     },
     "locatedIn" : {
-      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:5000",
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003",
+      "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
+      "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
+      "statusOfWork": {"type": "Property", "value": "completed"}
+    },
+    "@context": "'"${TUTORIAL_DATA_MODELS_CONTEXT}"'"
+}'
+
+curl -s -o /dev/null -X POST \
+  'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
+  -H 'Content-Type: application/ld+json' \
+  -d '{
+    "id": "urn:ngsi-ld:Shelf:unit009",
+    "type": "Shelf",
+    "location": {
+      "type": "GeoProperty",
+      "value": {"type": "Point", "coordinates": [13.444711,52.503122]}
+    },
+    "maxCapacity": {"type": "Property", "value": 50},
+    "numberOfItems": {"type": "Property", "value": 50},
+    "name": {"type": "Property", "value": "Corner Unit"},
+    "stocks": {
+      "type": "Relationship", "object": "urn:ngsi-ld:Product:009"
+    },
+    "locatedIn" : {
+      "type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:004",
       "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
       "installedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:employee001"},
       "statusOfWork": {"type": "Property", "value": "completed"}
@@ -555,7 +528,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:001",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:4567"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:001"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -572,7 +545,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:002",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:4567"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:003"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -589,7 +562,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:003",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:4567"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:001"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:004"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -610,7 +583,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:004",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:4000"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:002"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:001"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -627,7 +600,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:005",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:4000"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:002"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:002"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -648,7 +621,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:006",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:5000"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:001"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -665,7 +638,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:007",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:5000"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:008"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -682,7 +655,7 @@ curl -s -o /dev/null -X POST \
   -d '{
     "id": "urn:ngsi-ld:StockOrder:008",
     "type": "StockOrder",
-    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:mexico:5000"},
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:003"},
     "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
     "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:009"},
     "stockCount": {"type": "Property", "value": 10000},
@@ -692,6 +665,27 @@ curl -s -o /dev/null -X POST \
     },
     "@context": "'"${TUTORIAL_DATA_MODELS_CONTEXT}"'"
 }'
+#
+# Create a series of InventoryItems Entities. 
+# These the drinks on order in Store:004
+#
+curl -s -o /dev/null -X POST \
+  'http://'"${CONTEXT_BROKER}"'/ngsi-ld/v1/entities/' \
+  -H 'Content-Type: application/ld+json' \
+  -d '{
+    "id": "urn:ngsi-ld:StockOrder:010",
+    "type": "StockOrder",
+    "requestedFor": {"type": "Relationship", "object": "urn:ngsi-ld:Streetlight:streetlight:004"},
+    "requestedBy": {"type": "Relationship", "object": "urn:ngsi-ld:Person:bob-the-manager"},
+    "orderedProduct": {"type": "Relationship", "object": "urn:ngsi-ld:Product:001"},
+    "stockCount": {"type": "Property", "value": 10000},
+    "orderDate": {
+      "type": "Property", 
+      "value": { "@type": "DateTime", "@value": "2018-08-07T12:00:00Z"}
+    },
+    "@context": "'"${TUTORIAL_DATA_MODELS_CONTEXT}"'"
+}'
 
 
-echo -e " \033[1;32mStreetlight and entities create successfully!!\033[0m"
+
+echo -e " \033[1;32mdone\033[0m"

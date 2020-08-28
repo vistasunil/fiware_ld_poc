@@ -87,6 +87,8 @@ services:
         aliases:
           - iot-sensors
           - context-provider
+            #  volumes:
+            # - /home/sunilkumar03/fiware_ui:/usr/src/app
     expose:
       - "${TUTORIAL_APP_PORT}"
       - "${TUTORIAL_DUMMY_DEVICE_PORT}"
@@ -107,6 +109,15 @@ services:
       - "OPENWEATHERMAP_KEY_ID=<ADD_YOUR_KEY_ID>"
       - "TWITTER_CONSUMER_KEY=<ADD_YOUR_CONSUMER_KEY>"
       - "TWITTER_CONSUMER_SECRET=<ADD_YOUR_CONSUMER_SECRET>"
+      - "Streetlight1_urn=urn:ngsi-ld:Streetlight:streetlight:mexico:4567"
+      - "Streetlight1_name=Mexico 4567"
+      - "Streetlight2_urn=urn:ngsi-ld:Streetlight:streetlight:guadalajara:4567"
+      - "Streetlight2_name=Guadalajara 4567"
+      - "Streetlight3_urn=urn:ngsi-ld:Streetlight:streetlight:mexico:5000"
+      - "Streetlight3_name=Mexico 5000"
+      - "Streetlight4_urn=urn:ngsi-ld:Streetlight:streetlight:mexico:9000"
+      - "Streetlight4_name=Mexico 9000"
+
     healthcheck:
       test: curl --fail -s http://tutorial:${TUTORIAL_APP_PORT}/version || exit 1
   # Database
